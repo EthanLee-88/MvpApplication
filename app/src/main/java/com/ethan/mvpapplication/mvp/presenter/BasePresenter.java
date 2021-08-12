@@ -1,8 +1,10 @@
 package com.ethan.mvpapplication.mvp.presenter;
 
-import com.ethan.mvpapplication.mvp.view.IView;
+import androidx.lifecycle.LifecycleObserver;
 
-public class BasePresenter<V extends IView>{
+import com.ethan.mvpapplication.mvp.view.IView;
+// 实现 LifecycleObserver
+public class BasePresenter<V extends IView> implements LifecycleObserver {
 
     private V mView;
 

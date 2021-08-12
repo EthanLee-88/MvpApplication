@@ -9,7 +9,7 @@ import com.ethan.mvpapplication.mvp.view.IView;
 
 public abstract class BaseMvpActivity<P extends BasePresenter<IView>> extends AppCompatActivity implements IView {
 
-    private P mPresenter;
+    public P mPresenter;
     public P getPresenter() {
         return mPresenter;
     }
@@ -21,6 +21,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter<IView>> extends Ap
         initData();
         mPresenter = createP();
         mPresenter.attach(this);
+        getLifecycle().addObserver(mPresenter);
     }
     protected abstract P createP();
 
@@ -28,6 +29,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter<IView>> extends Ap
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detach();
+        getLifecycle().removeObserver(mPresenter);
     }
     abstract void setContentView();
 
